@@ -1,0 +1,225 @@
+@font-face {
+  font-family: 'neontubes';
+  src: url('https://bitbucket.org/kennethjensen/webfonts/raw/fc13c1cb430a0e9462da56fe3f421ff7af72db71/neontubes/neontubes-webfont.eot');
+  src: url('https://bitbucket.org/kennethjensen/webfonts/raw/fc13c1cb430a0e9462da56fe3f421ff7af72db71/neontubes/neontubes-webfont.eot?#iefix') format('embedded-opentype'),
+  url('https://bitbucket.org/kennethjensen/webfonts/raw/fc13c1cb430a0e9462da56fe3f421ff7af72db71/neontubes/neontubes-webfont.woff2') format('woff2'),
+  url('https://bitbucket.org/kennethjensen/webfonts/raw/fc13c1cb430a0e9462da56fe3f421ff7af72db71/neontubes/neontubes-webfont.woff') format('woff'),
+  url('https://bitbucket.org/kennethjensen/webfonts/raw/fc13c1cb430a0e9462da56fe3f421ff7af72db71/neontubes/neontubes-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+$clr1: rgb(255,0,60);
+$clr2: rgb(38,149,255);
+
+:root{
+  font-size: 10px;
+}
+
+body {
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background: #000;
+  color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-size: 1.8rem;
+  font-family: 'Lato';
+}
+
+main{
+  flex: 1;
+}
+
+figure{
+  width: 2rem;
+  height: 2rem;
+  margin: 0;
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+header, footer, main{
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.container{
+  max-width: 128rem;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header{
+  border-bottom: 1px solid #313647;
+}
+
+.logo{
+  width: 15rem;
+  height: 5rem;
+}
+
+.socials{
+  display: flex;
+  justify-content: space-between;
+  &__item{
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 1rem;
+    box-sizing: border-box;
+    border: 0;
+    transition: all 0.3s;
+    &:hover{
+      border: 1px solid #2695ff;
+      border-radius: 50%;
+      filter: drop-shadow(0 0 2px #2695ff);
+    }
+  }
+}
+
+.about{
+  &__left, &__right{
+    flex: 1;
+  }
+  &__logo{
+    margin-top: 0;
+  }
+  &__cards{
+    width: 100%;
+    height: 100%;
+  }
+  &__text{
+    line-height: 1.8;
+  }
+}
+
+footer{
+  font-weight: bold;
+  font-size: 1.6rem;
+  border-top: 1px solid #313647;
+}
+
+.form{
+  &__input{
+    background: transparent;
+    color: white;
+    padding: 1rem;
+    border: 1px solid white;
+    box-sizing: border-box;
+    transition: all 0.3s;
+    border-radius: 3px;
+    &::placeholder{
+      color: white;
+    }
+    &:focus, &:hover{
+      outline: 0;
+      border-color: #2695ff;
+      filter: drop-shadow(0 0 2px #2695ff);
+    }
+  }
+  &__btn{
+    margin-left: 1rem;
+    background: transparent;
+    color: white;
+    padding: 1rem;
+    border: 1px solid white;
+    box-sizing: border-box;
+    transition: all 0.3s;
+    border-radius: 3px;
+    &:hover{
+      cursor: pointer;
+      color: scale-color($clr1, $lightness: 85%);
+      border-color: #ff003c;
+      filter: drop-shadow(0 0 2px #ff003c);
+    }
+    &:active, &:focus{
+      outline: 0;
+    }
+  }
+}
+
+.about__logo {
+  display: block;
+  //position: absolute;
+  //top: 50%;
+  //left: 50%;
+  //transform: translate(-50%,-50%);
+  width: 50vw;
+  height: auto;
+  font-family: "neontubes";
+  font-size: 16vw;
+  line-height: 1.1;
+  text-align: left;
+  white-space: nowrap;
+  span {
+    display: block;
+    position: relative;
+    transform: translateZ(0) translate3D(0,0,0);
+    backface-visibility: hidden;
+    will-change: opacity;
+  }
+
+  .open {
+    transform: rotate(-1deg);
+    color: scale-color($clr1, $lightness: 85%);
+    text-shadow:
+            0 0 0 transparent,
+            0 0 10px $clr1,
+              /*0 5px 10px rgba(scale-color($clr1, $lightness: -80%),1),*/
+            0 0 20px rgba($clr1,.5),
+            0 0 40px rgba($clr1,1),
+            0 0 100px rgba($clr1,1),
+            0 0 200px rgba($clr1,1),
+            0 0 300px rgba($clr1,1),
+            0 0 500px rgba($clr1,1),
+            0 0 1000px rgba($clr1,1);
+    animation: blink 4s infinite alternate;
+  }
+  .hrs {
+    transform: rotate(1deg);
+    font-size: 11vw;
+    color: scale-color($clr2, $lightness: 80%);
+    text-shadow:
+            0 0 0 transparent,
+              /*0 5px 10px rgba(scale-color($clr2, $lightness: -80%),1),*/
+            0 0 10px $clr2,
+            0 0 20px rgba($clr2,.5),
+            0 0 40px rgba($clr2,1),
+            0 0 100px rgba($clr2,1),
+            0 0 200px rgba($clr2,1),
+            0 0 300px rgba($clr2,1),
+            0 0 500px rgba($clr2,1);
+    animation: buzz 0.01s infinite alternate;
+  }
+}
+
+@keyframes buzz {
+  70% { opacity: 0.80; }
+}
+@keyframes blink {
+  40% { opacity: 1; }
+  42% { opacity: 0.8; }
+  43% { opacity: 1; }
+  45% { opacity: 0.2; }
+  46% { opacity: 1; }
+}
+
+@media screen and (min-width: 1000px) {
+  .about__logo {
+    width: 400px;
+    font-size: 9rem;
+  }
+  .about__logo .hrs { font-size: 7rem; }
+}
