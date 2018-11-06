@@ -1,39 +1,12 @@
 var validateMail = function(mail){
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var re = /^[\w-_\.]+@[a-zA-Z_]+?\.[a-zA-Z]{2,5}$/;
     return re.test(String(mail).toLowerCase());
-};
-
-var validateName = function(mail){
-    var notNumbers = /^([^0-9]*)$/;
-    var notSymbols = /^[^`~!@#$%^&*()<>%$=+_,.[\]:;<>\\/|]*$/;
-
-    return notNumbers.test(String(mail).toLowerCase()) && notSymbols.test(String(mail).toLowerCase());
-};
-
-var validation = function(name, value){
-
-    var result = false;
-
-    switch(name){
-        case 'Email':
-            result = validateMail(value);
-            break;
-        case 'Name':
-            result = validateName(value);
-            break;
-        case 'Message':
-            result = value.length > 10;
-            break;
-    }
-
-    return result;
 };
 
 var validateField = function(field){
 
-    var name = field.name;
     var value = field.value;
-    var valid =  validation(name, value);
+    var valid =  validateMail(value);
     var classesArr = ['field--valid', 'field--invalid'];
     var domElem = field.parentElement;
 
@@ -51,7 +24,7 @@ var validateField = function(field){
     return valid;
 };
 
-var httpXMLRequest = function(object){
+var httpXMLRequest = function(obj){
 
     var btn = document.getElementById('formSubmit');
 
@@ -64,46 +37,50 @@ var httpXMLRequest = function(object){
 
     btn.disabled = true;
 
-    var xhr = new XMLHttpRequest();
-    var url = 'https://send-proposal-feedback.graphenelab.io/send.php';
-    var data = new FormData();
+    var objToSend = {
+        SendName: 'PokerChained Test',
+        body: 'I want to try PokerChained Test. Here is my Email: ' + obj.email
+    };
 
-    for(var i in object){
-        data.append(i, object[i]);
-    }
+    var xhr = new XMLHttpRequest();
+    var url = 'https://feedback.blckchnd.com/smm';
 
     xhr.open('POST', url, true);
 
-    xhr.send(data);
+    xhr.send(JSON.stringify(objToSend));
 
     xhr.onreadystatechange = function() {
+
         if (this.readyState != 4) return;
+
+        var result = JSON.parse(this.response).data.status;
 
         // по окончании запроса доступны:
         // status, statusText
         // responseText, responseXML (при content-type: text/xml)
 
-        if (this.status != 200) {
+        if (result != 'OK') {
             // обработать ошибку
             console.log(this);
             console.log( 'Error: ' + (this.status ? this.statusText : 'request failed!') );
-            btn.innerHTML = 'Send';
+            btn.innerHTML = 'Submit';
             btn.disabled = false;
             return;
-        } else {
-            var formDOM = document.getElementById('contact').getElementsByClassName('container')[0];
-            formDOM.innerHTML =
-                '<div class="contact__result">'
-                    + '<h3 class="contact__result-title">Thank you for getting in touch!</h3>'
-                    + '<p class="contact__result-text">'
-                        + 'We appreciate you contacting us about the quote. <br/>'
-                        + 'One of our colleagues will get back to you shortly.'
-                    + '</p>'
-                    + '<p class="contact__result-text">Have a great day!!</p>'
-                + '</div>';
         }
 
+        document.getElementById('formWrapper').innerHTML =
+            '<p>Thank you for message. When beta-test of our product begins, we\'ll message you.</p>';
     }
+};
+
+var mailResponse = async (name, email, phone, message) => {
+    let bodyMessage = email + ', ' + phone + '\n' + '\n' + message;
+    return await axios.post('https://feedback.blckchnd.com/smm', {
+        SendName: name,
+        body: bodyMessage
+    })
+        .then(() => true)
+        .catch(() => false);
 };
 
 var validateForm = function(e){
@@ -114,9 +91,13 @@ var validateForm = function(e){
     var errors = false;
     var object = {};
 
+    console.log(formElements);
+
     for(var i = 0; i < formElements.length; i++){
         var elem = formElements[i];
-        var valide = validateField(elem, true);
+        var valide = validateField(elem);
+
+        console.log(valide);
 
         if(!valide){
             errors = true;
@@ -124,6 +105,8 @@ var validateForm = function(e){
         }
 
         object[elem.name] = elem.value;
+
+        console.log(object);
     }
 
     if(!errors){

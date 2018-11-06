@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#000000">
     <title>PokerChained</title>
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -13,8 +14,8 @@
 <body>
     <header>
         <div class="container">
-            <a href="https://graphenelab.io/" target="_blank" rel="noopener">
-                <figure class="logo">
+            <a class="logo" href="https://graphenelab.io/" target="_blank" rel="noopener">
+                <figure class="logo__wrapper">
                     <img src="img/graphene-wh.png" alt="" />
                 </figure>
             </a>
@@ -79,6 +80,9 @@
                     <span class="open">poker</span>
                     <span class="hrs">chained</span>
                 </h1>
+                <figure class="about__mobile-cards">
+                    <img src="img/neon-blackjack-sign-768x512-v2.png" alt="">
+                </figure>
                 <p class="about__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultrices placerat enim, at congue massa tempor ut. Quisque a hendrerit metus, nec luctus risus. Ut eu volutpat nulla. Integer urna nulla, imperdiet vel justo nec, dictum venenatis nisl. Integer molestie sit amet tortor nec vehicula. Donec auctor nulla non mollis pulvinar. Fusce molestie arcu leo, non imperdiet eros ornare a. Sed ligula nisl, fringilla ut magna in, varius eleifend turpis. Proin semper libero non sapien scelerisque sagittis.</p>
             </div>
             <div class="about__right">
@@ -89,15 +93,66 @@
         </div>
     </main>
     <footer>
-        <div class="container">
-            <p>You want to try out beta-version of PokerCHND? Sign in!</p>
-            <form class="form" action="">
-                <input class="form__input" type="email" placeholder="Enter your email" />
-                <input class="form__btn" type="submit" />
+        <div id="formWrapper" class="container">
+            <p>You want to try out beta-version of PokerCHAINED? Sign in!</p>
+            <form class="form" onsubmit="validateForm(event)">
+                <input class="form__input" name="email" type="email" placeholder="Enter your email" />
+                <button id="formSubmit" class="form__btn" type="submit">Send</button>
             </form>
+            <div class="socials socials--footer">
+                <a
+                        href="https://steemit.com/@blockchained"
+                        target="_blank"
+                        rel="noopener"
+                        class="socials__item"
+                >
+                    <figure class="socials__image">
+                        <img src="img/socials/steemit.svg" alt="">
+                    </figure>
+                </a>
+                <a
+                        href="https://telegram.me/EOS_RU"
+                        target="_blank"
+                        rel="noopener"
+                        class="socials__item"
+                >
+                    <figure class="socials__image">
+                        <img src="img/socials/telegram.svg" alt="">
+                    </figure>
+                </a>
+                <a
+                        href="https://medium.com/@eos.blckchnd"
+                        target="_blank"
+                        rel="noopener"
+                        class="socials__item"
+                >
+                    <figure class="socials__image">
+                        <img src="img/socials/medium.svg" alt="">
+                    </figure>
+                </a>
+                <a
+                        href="https://golos.io/@blockchained"
+                        target="_blank"
+                        rel="noopener"
+                        class="socials__item"
+                >
+                    <figure class="socials__image">
+                        <img src="img/socials/golos.svg" alt="">
+                    </figure>
+                </a>
+                <a
+                        href="https://twitter.com/BLCKCHND"
+                        target="_blank"
+                        rel="noopener"
+                        class="socials__item"
+                >
+                    <figure class="socials__image">
+                        <img src="img/socials/twitter.svg" alt="">
+                    </figure>
+                </a>
+            </div>
         </div>
     </footer>
-    <script src="js/script.js"></script>
     <script src="js/validate.js"></script>
 </body>
 </html>
